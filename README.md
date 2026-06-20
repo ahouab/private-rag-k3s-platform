@@ -75,3 +75,6 @@ scripts/           Bootstrap and validation scripts
 ## Commercial Positioning
 
 Private RAG platform for organizations that need sovereign AI, data confidentiality, Kubernetes-native operations and production-grade observability.
+
+
+Walter Assets Trademark
