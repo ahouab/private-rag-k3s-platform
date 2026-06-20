@@ -1,0 +1,7 @@
+defaultSettings:
+  defaultReplicaCount: 2
+  createDefaultDiskLabeledNodes: false
+  backupTarget: ""
+persistence:
+  defaultClass: true
+  defaultClassReplicaCount: 2

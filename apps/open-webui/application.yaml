@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: open-webui
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://helm.openwebui.com/
+    chart: open-webui
+    targetRevision: 5.20.0
+    helm:
+      values: |
+        ollama:
+          enabled: false
+        extraEnvVars:
+          - name: OLLAMA_BASE_URL
+            value: http://ollama.ai-system.svc.cluster.local:11434
+        persistence:
+          enabled: true
+          storageClass: longhorn
+          size: 20Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ai-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

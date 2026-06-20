@@ -1,0 +1,18 @@
+persistentVolume:
+  enabled: true
+  storageClass: longhorn
+  size: 100Gi
+resources:
+  requests:
+    cpu: "2"
+    memory: 8Gi
+  limits:
+    cpu: "8"
+    memory: 24Gi
+nodeSelector:
+  workload: rag
+tolerations:
+  - key: dedicated
+    operator: Equal
+    value: ai
+    effect: NoSchedule

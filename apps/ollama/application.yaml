@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ollama
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://otwld.github.io/ollama-helm/
+    chart: ollama
+    targetRevision: 1.16.0
+    helm:
+      values: |
+        persistentVolume:
+          enabled: true
+          storageClass: longhorn
+          size: 100Gi
+        nodeSelector:
+          workload: rag
+        tolerations:
+          - key: dedicated
+            operator: Equal
+            value: ai
+            effect: NoSchedule
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ai-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,23 @@
+ollama:
+  enabled: false
+extraEnvVars:
+  - name: OLLAMA_BASE_URL
+    value: http://ollama.ai-system.svc.cluster.local:11434
+persistence:
+  enabled: true
+  storageClass: longhorn
+  size: 20Gi
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: "2"
+    memory: 4Gi
+nodeSelector:
+  workload: rag
+tolerations:
+  - key: dedicated
+    operator: Equal
+    value: ai
+    effect: NoSchedule

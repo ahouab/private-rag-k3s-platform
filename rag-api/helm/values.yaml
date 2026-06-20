@@ -1,0 +1,24 @@
+image:
+  repository: ghcr.io/ahouab/rag-api
+  tag: 0.1.0
+  pullPolicy: IfNotPresent
+replicaCount: 1
+service:
+  port: 8000
+ingress:
+  enabled: true
+  host: rag-api.lab.local
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: "4"
+    memory: 8Gi
+nodeSelector:
+  workload: rag
+tolerations:
+  - key: dedicated
+    operator: Equal
+    value: ai
+    effect: NoSchedule
